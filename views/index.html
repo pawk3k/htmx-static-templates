@@ -1,0 +1,18 @@
+{{ block "index" .}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- This script is needed for everything to work   -->
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    {{ template "count" . }}
+  </body>
+</html>
+
+{{ end }} {{ block "count" . }} Count: {{ .Count }}
+<button hx-target="body" hx-post="/count">Increment</button>
+{{end}}

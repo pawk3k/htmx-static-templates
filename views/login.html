@@ -1,0 +1,59 @@
+{{ block "login" .}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/css/output.css" rel="stylesheet" />
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+  </head>
+  <body>
+    <div
+      class="min-h-screen flex items-center justify-center bg-[#f3f3f1] font-mono relative"
+    >
+      <div class="absolute top-6 right-6">
+        <a href="#" class="hover:underline">en</a>
+      </div>
+
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div class="text-center mb-6">
+          <h1 class="text-2xl">Demo</h1>
+        </div>
+
+        <form hx-post="/login" id="login-form">
+          <div class="mb-4">
+            <label htmlFor="username" class="block mb-2">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              class="w-full p-2 border rounded"
+            />
+          </div>
+
+          <div class="mb-6">
+            <label htmlFor="password" class="block mb-2">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="w-full p-2 border rounded"
+            />
+          </div>
+
+          <button
+            type="submit"
+            form="login-form"
+            class="block w-full p-3 bg-white border rounded text-center hover:bg-[#f3f3f1]"
+          >
+            Log in
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+{{ end }}

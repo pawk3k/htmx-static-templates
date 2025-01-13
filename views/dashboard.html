@@ -1,0 +1,162 @@
+{{ block "dashboard" .}}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.js"></script>
+  </head>
+  <body class="bg-white">
+    <div class="flex min-h-screen">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-[#f3f3f1] p-6 space-y-6">
+        <h1 class="text-xl">Demo</h1>
+        <nav class="space-y-2">
+          <a href="#" class="block hover:bg-[#e7e7e6] px-4 py-2 rounded"
+            >Overview</a
+          >
+          <a href="#" class="block bg-[#d9d9d9] px-4 py-2 rounded">Data</a>
+          <a href="#" class="block hover:bg-[#e7e7e6] px-4 py-2 rounded"
+            >Keys</a
+          >
+          <a href="#" class="block hover:bg-[#e7e7e6] px-4 py-2 rounded"
+            >Help & support</a
+          >
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 p-6 relative">
+        <div class="flex justify-between items-center mb-6">
+          <div>
+            <h2 class="text-2xl mb-4">Data</h2>
+            <div class="flex space-x-2">
+              <label>
+                <input
+                  form="file-upload-form"
+                  type="radio"
+                  name="provider"
+                  value="uber"
+                  class="peer sr-only"
+                  checked
+                />
+                <span
+                  class="px-4 py-2 border cursor-pointer block hover:bg-[#f3f3f1] peer-checked:bg-[#d9d9d9] peer-checked:border-[#d9d9d9]"
+                >
+                  Uber
+                </span>
+              </label>
+              <label>
+                <input
+                  form="file-upload-form"
+                  type="radio"
+                  name="provider"
+                  value="bolt"
+                  class="peer sr-only"
+                />
+                <span
+                  class="px-4 py-2 border cursor-pointer block hover:bg-[#f3f3f1] peer-checked:bg-[#d9d9d9] peer-checked:border-[#d9d9d9]"
+                >
+                  Bolt
+                </span>
+              </label>
+              <label>
+                <input
+                  form="file-upload-form"
+                  type="radio"
+                  name="provider"
+                  value="free-now"
+                  class="peer sr-only"
+                />
+                <span
+                  class="px-4 py-2 border cursor-pointer block hover:bg-[#f3f3f1] peer-checked:bg-[#d9d9d9] peer-checked:border-[#d9d9d9]"
+                >
+                  Free Now
+                </span>
+              </label>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a href="login.html" class="hover:underline">Log out</a>
+            <a href="#" class="hover:underline">en</a>
+          </div>
+        </div>
+
+        <!-- File Input -->
+        <form
+          id="file-upload-form"
+          hx-encoding="multipart/form-data"
+          hx-post="/upload"
+          hx-target="#file-content"
+          hx-swap="innerHTML"
+          class="mb-6"
+        >
+          <label for="file-upload" class="block mb-2">Upload CSV File</label>
+          <div
+            class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-gray-400 transition-colors duration-200 ease-in-out"
+          >
+            <input
+              id="file-upload"
+              name="file-upload"
+              type="file"
+              multiple
+              accept=".csv"
+              class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              hx-trigger="change"
+            />
+            <div class="text-center">
+              <svg
+                class="mx-auto h-12 w-12 text-gray-400"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <p class="mt-1 text-sm text-gray-600">
+                Drag and drop a CSV file here, or click to select a file
+              </p>
+            </div>
+          </div>
+        </form>
+
+        <div
+          id="file-content"
+          class="mt-4 p-4 bg-gray-50 rounded-lg font-mono text-sm"
+        >
+          No file yet
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-4 space-x-2">
+          <button
+            class="px-4 py-2 border hover:bg-[#f3f3f1]"
+            form="file-upload-form"
+          >
+            Upload
+          </button>
+          <button class="px-4 py-2 border hover:bg-[#f3f3f1]">Download</button>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      document
+        .getElementById("file-upload")
+        .addEventListener("change", function (e) {
+          let fileName = e.target.files[0].name;
+          console.log(fileName);
+          // Here you can add code to handle the CSV file
+        });
+    </script>
+  </body>
+</html>
+{{ end }}
